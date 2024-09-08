@@ -104,93 +104,90 @@ export default function RecordPagination({ postsData }) {
     };
 
     return (
-        <>
-            <main className={`md:pt-[7.5%] pt-[25%] min-h-screen flex-col flex items-center transition-colors duration-300 bg-background text-foreground dark:bg-light-background dark:text-light-foreground`}>
-                
-                <div className="w-full flex flex-wrap justify-center gap-2 mb-4">
-                    {years.map(year => (
-                        <button
-                            key={year}
-                            className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedYear === year ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
-                            onClick={() => {
-                                setSelectedYear(year);
-                                setCurrentPage(1);
-                                setInvalidYear(false);
-                                router.push(`/records?year=${year}`);
-                            }}
-                        >
-                            {year}
-                        </button>
-                    ))}
+        <>                
+            <div className="w-full flex flex-wrap justify-center gap-2 mb-4">
+                {years.map(year => (
                     <button
-                        className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedYear === null ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
+                        key={year}
+                        className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedYear === year ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
                         onClick={() => {
-                            setSelectedYear(null);
+                            setSelectedYear(year);
                             setCurrentPage(1);
                             setInvalidYear(false);
-                            router.push(`/records`);
+                            router.push(`/records?year=${year}`);
                         }}
                     >
-                        All
+                        {year}
                     </button>
+                ))}
+                <button
+                    className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedYear === null ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
+                    onClick={() => {
+                        setSelectedYear(null);
+                        setCurrentPage(1);
+                        setInvalidYear(false);
+                        router.push(`/records`);
+                    }}
+                >
+                    All
+                </button>
+            </div>
+
+            {invalidYear ? (
+                <div className="text-center mt-8 min-h-[60vh] font-accent text-xl flex items-center justify-center text-foreground dark:text-light-foreground">
+                    Can't you see the buttons over there?
                 </div>
+            ) : (
+                <>
+                    {currentPosts.map((post, index) => (
+                        <Post
+                            key={index}
+                            title={post.title}
+                            date={post.date}
+                            category={post.category}
+                            ctfName={post.ctf}
+                            premise={post.htmlPremise}
+                            filename={post.filename}
+                        />
+                    ))}
 
-                {invalidYear ? (
-                    <div className="text-center mt-8 min-h-[60vh] font-accent text-xl flex items-center justify-center text-foreground dark:text-light-foreground">
-                        Can't you see the buttons over there?
-                    </div>
-                ) : (
-                    <>
-                        {currentPosts.map((post, index) => (
-                            <Post
-                                key={index}
-                                title={post.title}
-                                date={post.date}
-                                category={post.category}
-                                ctfName={post.ctf}
-                                premise={post.htmlPremise}
-                                filename={post.filename}
-                            />
-                        ))}
+                    {totalPages > 1 && (
+                        <div className="flex flex-col items-center gap-4 bg-background dark:bg-light-background max-w-max py-12">
+                            <div className="flex gap-4">
+                                <button
+                                    className="px-4 hover:opacity-85 py-2 disabled:cursor-not-allowed w-[6rem] border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
+                                    onClick={handlePrevious}
+                                    disabled={currentPage === 1}
+                                >
+                                    Previous
+                                </button>
 
-                        {totalPages > 1 && (
-                            <div className="flex flex-col items-center gap-4 bg-background dark:bg-light-background max-w-max py-12">
-                                <div className="flex gap-4">
+                                {generatePageNumbers().map((pageNumber, index) => (
                                     <button
-                                        className="px-4 hover:opacity-85 py-2 disabled:cursor-not-allowed w-[6rem] border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
-                                        onClick={handlePrevious}
-                                        disabled={currentPage === 1}
+                                        key={index}
+                                        className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${pageNumber === currentPage ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} ${pageNumber === '...' ? 'cursor-default' : ''}`}
+                                        onClick={() => {
+                                            if (pageNumber !== '...') {
+                                                handlePageChange(pageNumber);
+                                            }
+                                        }}
                                     >
-                                        Previous
+                                        {pageNumber}
                                     </button>
+                                ))}
 
-                                    {generatePageNumbers().map((pageNumber, index) => (
-                                        <button
-                                            key={index}
-                                            className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${pageNumber === currentPage ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} ${pageNumber === '...' ? 'cursor-default' : ''}`}
-                                            onClick={() => {
-                                                if (pageNumber !== '...') {
-                                                    handlePageChange(pageNumber);
-                                                }
-                                            }}
-                                        >
-                                            {pageNumber}
-                                        </button>
-                                    ))}
-
-                                    <button
-                                        className="px-4 disabled:cursor-not-allowed w-[6rem] py-2 border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background hover:opacity-85 text-foreground dark:text-light-foreground disabled:opacity-50"
-                                        onClick={handleNext}
-                                        disabled={currentPage === totalPages}
-                                    >
-                                        Next
-                                    </button>
-                                </div>
+                                <button
+                                    className="px-4 disabled:cursor-not-allowed w-[6rem] py-2 border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background hover:opacity-85 text-foreground dark:text-light-foreground disabled:opacity-50"
+                                    onClick={handleNext}
+                                    disabled={currentPage === totalPages}
+                                >
+                                    Next
+                                </button>
                             </div>
-                        )}
-                    </>
-                )}
-            </main>
+                        </div>
+                    )}
+                </>
+            )}
         </>
     );
 }
