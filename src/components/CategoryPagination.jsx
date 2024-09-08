@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from 'next/navigation';
 import Post from '@/components/Post';
@@ -122,62 +123,63 @@ export default function CategoryPagination({ postsData }) {
                         All
                     </button>
                 </div>
+                <Suspense fallback={<div>Loading...</div>}>
+                    {filteredPosts.length === 0 ? (
+                        <div className="text-center mt-8 min-h-[60vh] font-accent text-xl flex items-center justify-center text-foreground dark:text-light-foreground">
+                            Can't you see the buttons over there?
+                        </div>
+                    ) : (
+                        <>
+                            {currentPosts.map((post, index) => (
+                                <Post
+                                    key={index}
+                                    title={post.title}
+                                    date={post.date}
+                                    category={post.category}
+                                    ctfName={post.ctf}
+                                    premise={post.htmlPremise}
+                                    filename={post.filename}
+                                />
+                            ))}
 
-                {filteredPosts.length === 0 ? (
-                    <div className="text-center mt-8 min-h-[60vh] font-accent text-xl flex items-center justify-center text-foreground dark:text-light-foreground">
-                        Can't you see the buttons over there?
-                    </div>
-                ) : (
-                    <>
-                        {currentPosts.map((post, index) => (
-                            <Post
-                                key={index}
-                                title={post.title}
-                                date={post.date}
-                                category={post.category}
-                                ctfName={post.ctf}
-                                premise={post.htmlPremise}
-                                filename={post.filename}
-                            />
-                        ))}
-
-                        {totalPages > 1 && (
-                            <div className="flex flex-col items-center gap-4 bg-background dark:bg-light-background max-w-max py-12">
-                                <div className="flex gap-4">
-                                    <button
-                                        className="px-4 hover:opacity-85 py-2 disabled:cursor-not-allowed w-[6rem] border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
-                                        onClick={handlePrevious}
-                                        disabled={currentPage === 1}
-                                    >
-                                        Previous
-                                    </button>
-
-                                    {generatePageNumbers().map((pageNumber, index) => (
+                            {totalPages > 1 && (
+                                <div className="flex flex-col items-center gap-4 bg-background dark:bg-light-background max-w-max py-12">
+                                    <div className="flex gap-4">
                                         <button
-                                            key={index}
-                                            className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${pageNumber === currentPage ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} ${pageNumber === '...' ? 'cursor-default' : ''}`}
-                                            onClick={() => {
-                                                if (pageNumber !== '...') {
-                                                    handlePageChange(pageNumber);
-                                                }
-                                            }}
+                                            className="px-4 hover:opacity-85 py-2 disabled:cursor-not-allowed w-[6rem] border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
+                                            onClick={handlePrevious}
+                                            disabled={currentPage === 1}
                                         >
-                                            {pageNumber}
+                                            Previous
                                         </button>
-                                    ))}
 
-                                    <button
-                                        className="px-4 hover:opacity-85 disabled:cursor-not-allowed w-[6rem] py-2 border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
-                                        onClick={handleNext}
-                                        disabled={currentPage === totalPages}
-                                    >
-                                        Next
-                                    </button>
+                                        {generatePageNumbers().map((pageNumber, index) => (
+                                            <button
+                                                key={index}
+                                                className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${pageNumber === currentPage ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} ${pageNumber === '...' ? 'cursor-default' : ''}`}
+                                                onClick={() => {
+                                                    if (pageNumber !== '...') {
+                                                        handlePageChange(pageNumber);
+                                                    }
+                                                }}
+                                            >
+                                                {pageNumber}
+                                            </button>
+                                        ))}
+
+                                        <button
+                                            className="px-4 hover:opacity-85 disabled:cursor-not-allowed w-[6rem] py-2 border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
+                                            onClick={handleNext}
+                                            disabled={currentPage === totalPages}
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
-                    </>
-                )}
+                            )}
+                        </>
+                    )}
+                </Suspense>
             </main>
         </>
     );
