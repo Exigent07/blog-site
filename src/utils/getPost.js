@@ -2,7 +2,6 @@ import matter from "gray-matter";
 import fs from "fs";
 import path from "path";
 import { marked } from "marked";
-import { fileURLToPath } from "url";
 
 marked.setOptions({
     highlight: function(code, lang) {
@@ -10,10 +9,7 @@ marked.setOptions({
     }
 });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const BASE_DIR = path.resolve(__dirname, "posts");
+const BASE_DIR = path.resolve(process.cwd(), "posts");
 
 function slugify(text) {
     return text
