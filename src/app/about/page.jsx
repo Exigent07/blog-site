@@ -14,7 +14,7 @@ export default function About() {
                 Hi, I&apos;m Aravindh a Cyber Security student from India with a big interest in Web Security. I enjoy learning about how websites work and how to keep them safe. My goal is to find and fix security problems to help protect the internet.
             </p>
             <p className="font-body text-xl max-w pt-8 px-4">
-                In my free time, I also like to do web development and build websites. If you want to check out some of my work, feel free to visit <span onClick={() => window.open("https://exigent-portfolio.vercel.app/")} className="underline hover:opacity-85 cursor-pointer">my portfolio</span>.
+                In my free time, I also like to do web development and build websites. If you want to check out some of my work, feel free to visit <span onClick={() => window.open("https://exigent-app.vercel.app/")} className="underline hover:opacity-85 cursor-pointer">my portfolio</span>.
             </p>
             <p className="font-body text-xl max-w pt-8 px-4">
                 I often share CTF writeups and other interesting topics on this blog. I also play Capture The Flag (CTF) with <span onClick={() => window.open("https://bi0s.in")} className="underline hover:opacity-85 cursor-pointer">team bi0s</span>.
