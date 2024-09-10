@@ -96,11 +96,11 @@ export default function CategoryPagination({ postsData }) {
 
     return (
         <>
-            <div className="flex self-center px-[10%] justify-self-center max-w items-center justify-center flex-wrap gap-2 mb-4">
+            <div className="transition-colors duration-300 flex self-center px-[10%] justify-self-center max-w items-center justify-center flex-wrap gap-2 mb-4">
                 {categories.map(category => (
                     <button
                         key={category}
-                        className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedCategory === category ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
+                        className={`transition-colors duration-300 px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedCategory === category ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
                         onClick={() => {
                             setSelectedCategory(category);
                             setCurrentPage(1);
@@ -111,7 +111,7 @@ export default function CategoryPagination({ postsData }) {
                     </button>
                 ))}
                 <button
-                    className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedCategory === null ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
+                    className={`transition-colors duration-300 px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedCategory === null ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
                     onClick={() => {
                         setSelectedCategory(null);
                         setCurrentPage(1);
@@ -123,7 +123,7 @@ export default function CategoryPagination({ postsData }) {
             </div>
 
             {filteredPosts.length === 0 ? (
-                <div className="text-center mt-8 min-h-[60vh] font-accent text-xl flex items-center justify-center text-foreground dark:text-light-foreground">
+                <div className="transition-colors duration-300 text-center mt-8 min-h-[60vh] font-accent text-xl flex items-center justify-center text-foreground dark:text-light-foreground">
                     Can't you see the buttons over there?
                 </div>
             ) : (

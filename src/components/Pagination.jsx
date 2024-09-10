@@ -113,8 +113,8 @@ export default function Pagination({ postsData }) {
                     <p>No posts found</p>
                 )}
                 
-                <div className="flex flex-col items-center gap-4 bg-background dark:bg-light-background max-w-max py-12">
-                    <div className="flex gap-4">
+                <div className="flex transition-colors duration-300 flex-col items-center gap-4 bg-background dark:bg-light-background max-w-max py-12">
+                    <div className="flex gap-4 transition-colors duration-300">
                         <button
                             className="px-4 hover:opacity-85 py-2 disabled:cursor-not-allowed w-[6rem] border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
                             onClick={handlePrevious}
@@ -126,7 +126,7 @@ export default function Pagination({ postsData }) {
                         {generatePageNumbers().map((pageNumber, index) => (
                             <button
                                 key={index}
-                                className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${pageNumber === currentPage ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} ${pageNumber === '...' ? 'cursor-default' : ''}`}
+                                className={`px-4 hover:opacity-85 transition-colors duration-300 py-2 rounded-sm mx-1 ${pageNumber === currentPage ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} ${pageNumber === '...' ? 'cursor-default' : ''}`}
                                 onClick={() => {
                                     if (pageNumber !== '...') {
                                         handlePageChange(pageNumber);
@@ -138,7 +138,7 @@ export default function Pagination({ postsData }) {
                         ))}
 
                         <button
-                            className="px-4 hover:opacity-85 disabled:cursor-not-allowed w-[6rem] py-2 border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
+                            className="px-4 transition-colors duration-300 hover:opacity-85 disabled:cursor-not-allowed w-[6rem] py-2 border-t border-b border-light-border dark:border-light-foreground bg-background dark:bg-light-background text-foreground dark:text-light-foreground disabled:opacity-50"
                             onClick={handleNext}
                             disabled={currentPage === totalPages}
                         >

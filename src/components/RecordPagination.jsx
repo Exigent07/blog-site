@@ -105,11 +105,11 @@ export default function RecordPagination({ postsData }) {
 
     return (
         <>                
-            <div className="w-full flex flex-wrap justify-center gap-2 mb-4">
+            <div className="transition-colors duration-300 w-full flex flex-wrap justify-center gap-2 mb-4">
                 {years.map(year => (
                     <button
                         key={year}
-                        className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedYear === year ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
+                        className={`transition-colors duration-300 px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedYear === year ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
                         onClick={() => {
                             setSelectedYear(year);
                             setCurrentPage(1);
@@ -121,7 +121,7 @@ export default function RecordPagination({ postsData }) {
                     </button>
                 ))}
                 <button
-                    className={`px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedYear === null ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
+                    className={`transition-colors duration-300 px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedYear === null ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
                     onClick={() => {
                         setSelectedYear(null);
                         setCurrentPage(1);
