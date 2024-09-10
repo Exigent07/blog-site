@@ -17,7 +17,7 @@ export default function Post({ title, date, category, ctfName, premise, filename
     }, []);
 
     return (
-        <section className="max-w relative flex flex-col gap-4 p-6 md:p-10 text-left bg-background dark:bg-light-background">
+        <section className="max-w transition-colors duration-300 relative flex flex-col gap-4 p-6 md:p-10 text-left bg-background dark:bg-light-background">
             <style jsx>{`
                 section::before {
                     content: '';

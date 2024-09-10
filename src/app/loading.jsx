@@ -1,5 +1,9 @@
 import Loading from "@/components/Loading";
 
 export default function Loader() {
-    return <Loading />
+    return (
+        <div className="h-screen w-full bg-background dark:bg-light-background">
+            <Loading />
+        </div>
+    )
 }
