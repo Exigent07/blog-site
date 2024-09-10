@@ -4,7 +4,7 @@ import Tailwind from "../svg/tailwind.svg";
 export default function Footer() {
     return (
         <footer className="h-[15vh] select-none w-full flex items-center justify-center bg-background dark:bg-light-background">
-            <div className="flex flex-col md:flex-row w-full max-w-4xl items-center justify-between px-6 md:px-10 text-center md:text-left">
+            <div className="flex transition-colors duration-300 flex-col md:flex-row w-full max-w-4xl items-center justify-between px-6 md:px-10 text-center md:text-left">
                 <p className="text-foreground text-sm dark:text-light-foreground font-accent mb-4 md:mb-0">
                     All Rights Reserved ©2024 Exigent
                 </p>
