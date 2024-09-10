@@ -1,4 +1,5 @@
 import FullPost from '@/components/FullPost';
+import Loading from '@/components/Loading';
 import { readFile } from '@/utils/getPost';
 import { notFound } from 'next/navigation';
 
@@ -16,7 +17,7 @@ export default function Post({ params }) {
     }
 
     if (!postData) {
-        return <p>Loading...</p>;
+        return <Loading />;
     }
 
     return (
