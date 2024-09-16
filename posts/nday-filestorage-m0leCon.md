@@ -88,7 +88,7 @@ if (isset($_POST['settings'])) {
 }
 ```
 
-The application uses session settings to create a stream context, which is user-controlled. PHP's FTP stream context allows a [`proxy`](https://www.php.net/manual/en/context.ftp.php) to be passed. By leveraging this, we can send an HTTP request via CRLF injection.
+The application uses session settings to create a stream context, which is user-controlled. PHP's FTP stream context allows a [`proxy`](https://www.php.net/manual/en/context.ftp.php) to be passed. By using this, we can send an HTTP request via CRLF injection.
 
 ---
 
