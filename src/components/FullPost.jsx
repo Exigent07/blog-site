@@ -13,6 +13,7 @@ import 'highlight.js/lib/languages/bash';
 import 'highlight.js/lib/languages/php';
 import 'highlight.js/lib/languages/ruby';
 import 'highlight.js/lib/languages/sql';
+import 'highlight.js/lib/languages/dockerfile';
 import { IoMdArrowDroprightCircle, IoMdArrowDropdownCircle } from "react-icons/io"
 import { useRouter } from 'next/navigation';
 
@@ -23,7 +24,7 @@ export default function FullPost({ postData }) {
     const handleScroll = (slug) => {
         const element = document.getElementById(slug);
         if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
 

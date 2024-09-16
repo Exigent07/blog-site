@@ -33,7 +33,13 @@ export default function Post({ title, date, category, ctfName, premise, filename
             <h2 className="text-2xl md:text-4xl font-heading text-center md:text-left">{title}</h2>
             <div className="flex self-center md:self-start flex-col md:flex-row font-accent items-center gap-4 md:gap-5 justify-center text-sm">
                 <p className="hover:underline hover:opacity-85 cursor-pointer" onClick={() => router.push(`/records?year=${new Date(date).getFullYear()}`)}>{date}</p>
-                <p className="hover:underline hover:opacity-85 cursor-pointer" onClick={() => router.push(`/category?category=${category}`)}>{category}</p>
+                <div className="flex gap-2">
+                    {
+                        category.split(",").map((categoryCurrent, index) => {
+                            return <p key={index}  className="hover:underline hover:opacity-85 cursor-pointer" onClick={() => router.push(`/category?category=${categoryCurrent}`)}>{categoryCurrent}</p>
+                        })
+                    }
+                </div>
                 <p>{ctfName}</p>
             </div>
             <div className="font-body mt-4 md:text-left text-center" dangerouslySetInnerHTML={{ __html: premise }} />

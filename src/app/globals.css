@@ -26,8 +26,9 @@
   --max-width: 1000px;
 }
 
-html {
+html * {
   scroll-behavior: smooth;
+  transition: none !important;
 }
 
 html::-webkit-scrollbar-track {
@@ -46,8 +47,29 @@ html::-webkit-scrollbar-thumb {
 
 pre {
   position: relative;
-  margin-top: 5%;
-  margin-bottom: 5%;
+  margin-top: 1.5%;
+  margin-bottom: 2%;
+}
+
+code:not([class^="language-"]) {
+  font-weight: bold;
+  background-color: var(--border-dark);
+  border-radius: 5px;
+  padding: 5px;
+  color: #fff;
+}
+
+blockquote {
+  background-color: var(--border-dark);
+}
+
+html.dark blockquote {
+  background-color: var(--border-light);
+}
+
+html.dark code:not([class^="language-"]) {
+  background-color: var(--border-light);
+  color: #000;
 }
 
 pre code {
@@ -104,6 +126,31 @@ pre::before {
   font-size: 2em;
 }
 
+#postContent h4 {
+  margin-top: 1rem;
+  font-size: 1.35em;
+}
+
+#postContent hr {
+  margin-top: 7.5%;
+  margin-bottom: 7.5%;
+  border: none;
+  height: 1px;
+  background: none;
+  position: relative;
+}
+
+#postContent hr::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, transparent, #7c7c7c, transparent);
+}
+
+
 #premise::before {
   content: '';
   display: block;
@@ -145,6 +192,14 @@ pre::before {
 
 .dark .custom-shadow {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+#postContent a:hover {
+  text-decoration: underline dotted;
+}
+
+#postContent li {
+  list-style: disc;
 }
 
 @media (min-width: 768px) {

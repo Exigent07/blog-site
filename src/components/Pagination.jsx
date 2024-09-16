@@ -11,10 +11,10 @@ export default function Pagination({ postsData }) {
     
     const filteredPosts = searchQuery
         ? postsData.filter(post => 
-            post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.ctf.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.htmlPremise.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.category.toLowerCase().includes(searchQuery.toLocaleLowerCase())
+            post.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            post.ctf?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            post.htmlPremise?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            post.category?.toLowerCase().includes(searchQuery.toLocaleLowerCase())
           )
         : postsData;
     

@@ -6,20 +6,20 @@ import Post from '@/components/Post';
 
 export default function CategoryPagination({ postsData }) {
     const [currentPage, setCurrentPage] = useState(1);
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const postsPerPage = 7;
     const router = useRouter();
     const searchParams = useSearchParams();
 
     const extractCategories = () => {
-        const categories = postsData.map(post => post.category);
+        const categories = postsData.flatMap(post => post.category?.split(","));
         return [...new Set(categories)];
     };
 
     const categories = extractCategories();
 
-    const filteredPosts = selectedCategory
-        ? postsData.filter(post => post.category === selectedCategory)
+    const filteredPosts = selectedCategories.length > 0
+        ? postsData.filter(post => selectedCategories.some(cat => post.category.includes(cat)))
         : postsData;
 
     const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
@@ -33,16 +33,13 @@ export default function CategoryPagination({ postsData }) {
     };
 
     useEffect(() => {
-        const categoryParam = searchParams.get('category');
-
-        if (categoryParam) {
-            setSelectedCategory(categoryParam);
+        const categoryParams = searchParams.getAll('category');
+        if (categoryParams.length) {
+            setSelectedCategories(categoryParams);
         } else {
-            setSelectedCategory(null);
+            setSelectedCategories([]);
         }
-
         setCurrentPage(1);
-
         scrollToTop();
     }, [searchParams]);
 
@@ -94,29 +91,37 @@ export default function CategoryPagination({ postsData }) {
         return pages;
     };
 
+    const toggleCategory = (category) => {
+        setSelectedCategories(prevCategories =>
+            prevCategories.includes(category)
+                ? prevCategories.filter(cat => cat !== category)
+                : [...prevCategories, category]
+        );
+        setCurrentPage(1);
+        router.push(`/category?category=${category}`);
+    };
+
+    const clearCategories = () => {
+        setSelectedCategories([]);
+        setCurrentPage(1);
+        router.push(`/category`);
+    };
+
     return (
         <>
             <div className="transition-colors duration-300 flex self-center px-[10%] justify-self-center max-w items-center justify-center flex-wrap gap-2 mb-4">
                 {categories.map(category => (
                     <button
                         key={category}
-                        className={`transition-colors duration-300 px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedCategory === category ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
-                        onClick={() => {
-                            setSelectedCategory(category);
-                            setCurrentPage(1);
-                            router.push(`/category?category=${category}`);
-                        }}
+                        className={`transition-colors duration-300 px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedCategories.includes(category) ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
+                        onClick={() => toggleCategory(category)}
                     >
                         {category}
                     </button>
                 ))}
                 <button
-                    className={`transition-colors duration-300 px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedCategory === null ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
-                    onClick={() => {
-                        setSelectedCategory(null);
-                        setCurrentPage(1);
-                        router.push(`/category`);
-                    }}
+                    className={`transition-colors duration-300 px-4 hover:opacity-85 py-2 rounded-sm mx-1 ${selectedCategories.length === 0 ? 'bg-foreground text-background dark:bg-light-foreground dark:text-light-background' : 'bg-secondaryAccent dark:bg-light-secondaryAccent opacity-85 text-primaryAccent dark:text-light-primaryAccent'} `}
+                    onClick={clearCategories}
                 >
                     All
                 </button>

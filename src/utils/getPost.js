@@ -24,7 +24,7 @@ function generateToC(content) {
     let currentSection = null;
 
     lines.forEach(line => {
-        const headingMatch = /^(#{1,6})\s+(.*)/.exec(line);
+        const headingMatch = /^(#{1,3})\s+(.*)/.exec(line);
         if (headingMatch) {
             const level = headingMatch[1].length;
             const headingText = headingMatch[2].trim();
