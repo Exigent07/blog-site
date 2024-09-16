@@ -32,7 +32,7 @@ app.post("/flag", (req, res) => {
 });
 ```
 
-Our goal is to send a POST request to the Node.js application with an `x-get-flag` header. In addition, there is another route, `/create-user`, which allows for creating a new user.
+Our goal is to send a POST request to the Node.js application with an `x-get-flag` header. In addition, there is another route, `/create-user`, which creates a new user.
 
 ### PHP
 
@@ -58,7 +58,7 @@ This retrieves the file and sends it as a response.
 $stmt = $database->prepare("INSERT INTO files (owner, filename, size) VALUES (:owner, '$filename', :size)");
 ```
 
-Here, the application directly incorporates user-specified values into the SQL query, allowing us to inject malicious input as the filename.
+Here, the application directly incorporates user-specified values into the SQL query, allowing us to inject in filename.
 
 ### CRLF
 #### In the same file, there is a CRLF injection vulnerability:
