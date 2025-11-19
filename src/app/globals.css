@@ -28,31 +28,76 @@
 
 @layer base {
   #postContent table {
-    @apply w-full my-6 border-collapse bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden;
+    @apply w-full my-6 border-collapse shadow-sm rounded-lg overflow-hidden;
+    background-color: var(--background-dark);
+    border: 1px solid var(--border-dark);
+  }
+
+  html.dark #postContent table {
+    background-color: var(--background-light);
+    border-color: var(--border-light);
   }
 
   #postContent thead {
-    @apply bg-gray-100 dark:bg-gray-800;
+    background-color: var(--secondary-accent-dark);
+  }
+
+  html.dark #postContent thead {
+    background-color: var(--secondary-accent-light);
   }
 
   #postContent thead tr {
-    @apply border-b-2 border-gray-300 dark:border-gray-600;
+    border-bottom: 2px solid var(--primary-accent-dark);
+  }
+
+  html.dark #postContent thead tr {
+    border-bottom-color: var(--primary-accent-light);
   }
 
   #postContent th {
-    @apply px-6 py-3 text-left text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider;
+    @apply px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider;
+    font-family: var(--font-accent);
+    color: var(--foreground-dark);
+  }
+
+  html.dark #postContent th {
+    color: var(--foreground-light);
   }
 
   #postContent tbody {
-    @apply divide-y divide-gray-200 dark:divide-gray-700;
+    @apply divide-y;
+    border-color: var(--border-dark);
+  }
+
+  html.dark #postContent tbody {
+    border-color: var(--border-light);
   }
 
   #postContent tbody tr {
-    @apply hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors;
+    @apply transition-colors;
+    border-bottom: 1px solid var(--border-dark);
+  }
+
+  html.dark #postContent tbody tr {
+    border-bottom-color: var(--border-light);
+  }
+
+  #postContent tbody tr:hover {
+    background-color: var(--border-dark);
+  }
+
+  html.dark #postContent tbody tr:hover {
+    background-color: var(--border-light);
   }
 
   #postContent td {
-    @apply px-6 py-4 text-sm text-gray-900 dark:text-gray-100;
+    @apply px-6 py-4 text-sm;
+    font-family: var(--font-body);
+    color: var(--foreground-dark);
+  }
+
+  html.dark #postContent td {
+    color: var(--foreground-light);
   }
 
   @media (max-width: 640px) {
@@ -64,6 +109,7 @@
 
   #postContent .table-wrapper {
     @apply overflow-x-auto -mx-4 sm:mx-0;
+    max-width: 100%;
   }
 }
 
