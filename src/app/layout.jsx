@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className="antialiased"
+        className="transition-colors duration-300 bg-background text-foreground dark:bg-light-background dark:text-light-foreground"
       >
         <Nav />
         {children}
